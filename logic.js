@@ -4,30 +4,42 @@ $(document).ready(function () {
     var word = "";
     var keyes=[];
 
+    
+
 
     function get_new_word() {
-        let new_word = word_array[Math.random() * word_array.length];
-            return new_word;
+        word = word_array[Math.floor(Math.random() * word_array.length)];
+    
     }
 
     function generate_blanks() {
+        get_new_word();
+        console.log(word);
+
         for(let i=0; i < word.length; i++){
-            blank_spots.push("_");
+            blank_spots.push("_ ");
         }
+        draw_blanks();
 
     }
-    function reset(){
-        word = get_new_word();
+    function draw_blanks(){
+        for(let i=0; i < blank_spots.length; i++){
+            $(".name").append(blank_spots[i]);
+
+        }
+        
     }
-    reset();
+   
     generate_blanks();
 
 
 
     document.onkeypress = function(event){
         let key = event.key.toLowerCase();
+        console.log(key);
         if(keyes.indexOf(key) === -1){
             keyes.push(key);
+            console.log(keyes);
         }
         if(word.indexOf(key) !== -1){
             blank_spots.push(word.indexOf(key));
@@ -37,4 +49,4 @@ $(document).ready(function () {
 
 
     }
-}
+});
