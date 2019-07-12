@@ -1,8 +1,11 @@
+var word_array = ["snoopy", "goofy", "ninja_turtles", "spongebob", "homer"];
+var blank_spots = [];
+var word = "";
+var keyes=[];
+
+
 $(document).ready(function () {
-    var word_array = ["snoopy", "goofy", "ninja_turtles", "spongebob", "homer"];
-    var blank_spots = [];
-    var word = "";
-    var keyes=[];
+    
 
     
 
@@ -37,13 +40,22 @@ $(document).ready(function () {
             }
         }
     }
+    function checkCompletion () {
+        // var reconstructedWord = blank_spots.join();
+        // console.log(reconstructedWord);
+        if ( blank_spots.join('') === word ) {
+
+            alert("Correct You win!");
+        }
+     }
    
     generate_blanks();
 
 
 
-    document.onkeypress = function(event){
+    document.onkeyup = function(event){
         let key = event.key.toLowerCase();
+        
         console.log(key);
         if(keyes.indexOf(key) === -1){
             keyes.push(key);
@@ -51,12 +63,13 @@ $(document).ready(function () {
             if(word.includes(key)){
                 
                 right_guess(key);
-                //blank_spots[word.indexOf(key)] = key;
                 draw_blanks();
-                console.log("YES");
+
+
+                checkCompletion();
+                
             }
         }
-        
         
 
 
