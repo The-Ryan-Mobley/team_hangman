@@ -17,17 +17,25 @@ $(document).ready(function () {
         console.log(word);
 
         for(let i=0; i < word.length; i++){
-            blank_spots.push("_ ");
+            blank_spots.push("_");
         }
         draw_blanks();
 
     }
     function draw_blanks(){
+        $(".name").empty();
         for(let i=0; i < blank_spots.length; i++){
             $(".name").append(blank_spots[i]);
 
         }
         
+    }
+    function right_guess(key){
+        for(let i=0; i < word.length; i++){
+            if(key === word[i]){
+                blank_spots[i] = key;
+            }
+        }
     }
    
     generate_blanks();
@@ -40,11 +48,15 @@ $(document).ready(function () {
         if(keyes.indexOf(key) === -1){
             keyes.push(key);
             console.log(keyes);
+            if(word.includes(key)){
+                
+                right_guess(key);
+                //blank_spots[word.indexOf(key)] = key;
+                draw_blanks();
+                console.log("YES");
+            }
         }
-        if(word.indexOf(key) !== -1){
-            blank_spots.push(word.indexOf(key));
-        }
-
+        
         
 
 
